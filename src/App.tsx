@@ -5,16 +5,16 @@ import { generateClient } from "aws-amplify/data";
 const client = generateClient<Schema>();
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [todos, setTodos] = useState<Array<Schema["Howard"]["type"]>>([]);
 
   useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
+    client.models.Howard.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
     });
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+    client.models.Howard.create({ Name: window.prompt("Todo content") });
   }
 
   return (
@@ -23,7 +23,7 @@ function App() {
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+          <li key={todo.id}>{todo.Name}</li>
         ))}
       </ul>
       <div>
